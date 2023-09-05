@@ -18,10 +18,11 @@ class SniffModule(WifiModule, ScanMixin):
     })
     path = "auxiliary/wifi"
     
-    def run(self, filter_func=lambda *a, **kw):
+    def run(self, filter_func=lambda *a, **kw: None):
         self._filter_func = filter_func
         ScanMixin.scan(self, self.config.option('INTERFACE').value, self.config.option('TIMEOUT').value)
         delattr(self, "_filter_func")
+
 
 
 class FindSsids(SniffModule):
